@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPF Analyzer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Source Sans 3',system-ui,sans-serif;background:#fafaf9;min-height:100vh;padding:40px 20px}.container{max-width:680px;margin:0 auto}.card{background:#fff;border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.06);border:1px solid #e7e5e4;padding:24px;margin-bottom:20px}h1{font-family:'Instrument Serif',Georgia,serif;font-size:38px;font-weight:400;color:#1a1a1a;margin-bottom:8px;text-align:center}.subtitle{color:#78716c;font-size:15px;text-align:center;margin-bottom:32px}.btn{padding:12px 24px;border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;border:none;transition:.15s;font-family:inherit}.btn-primary{background:#1a1a1a;color:#fff}.btn-primary:hover:not(:disabled){background:#333}.btn-primary:disabled{background:#d6d3d1;cursor:not-allowed}.btn-secondary{background:#f5f5f4;color:#57534e;border:1px solid #e7e5e4}.btn-secondary:hover{background:#e7e5e4}.btn-sm{padding:8px 16px;font-size:13px}.mode-tabs{display:flex;gap:8px;margin-bottom:20px}.mode-tab{flex:1;padding:10px 16px;border-radius:10px;font-weight:500;font-size:13px;cursor:pointer;border:2px solid transparent;background:#f5f5f4;color:#78716c;text-align:center;transition:.15s;font-family:inherit}.mode-tab.active{background:#1a1a1a;color:#fff}.mode-tab:not(.active):hover{background:#e7e5e4}textarea,input[type=text]{width:100%;padding:14px;border:2px solid #e7e5e4;border-radius:10px;font-size:14px;font-family:inherit;background:#fff;resize:vertical}textarea:focus,input[type=text]:focus{outline:none;border-color:#a8a29e}textarea{min-height:120px}.upload-zone{border:2px dashed #d6d3d1;border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;background:#fafaf9;transition:.15s}.upload-zone:hover{border-color:#a8a29e;background:#f5f5f4}.upload-zone.has-image{padding:16px;border-style:solid;border-color:#e7e5e4}.upload-zone img{max-width:100%;max-height:200px;border-radius:8px;object-fit:contain}.btn-row{display:flex;gap:10px;margin-top:16px}.btn-row .btn-primary{flex:1}.error-box{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:12px 16px;color:#b91c1c;font-size:14px;margin-top:16px}.hidden{display:none!important}.result-header{text-align:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #e7e5e4}.result-brand{font-size:13px;color:#78716c;margin-bottom:4px}.result-name{font-size:22px;font-weight:600;color:#1a1a1a;text-transform:capitalize}.confidence-badge{display:inline-block;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;text-transform:uppercase;margin-top:8px}.confidence-high{background:#dcfce7;color:#166534}.confidence-medium{background:#fef3c7;color:#92400e}.confidence-low{background:#fee2e2;color:#991b1b}.result-notes{font-size:13px;color:#78716c;margin-top:8px}.score-section{text-align:center;margin-bottom:20px}.score-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#a8a29e;margin-bottom:12px}.score-ring{width:100px;height:100px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center}.score-inner{width:84px;height:84px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}.score-number{font-size:28px;font-weight:700;line-height:1}.score-max{font-size:11px;color:#78716c}.score-verdict{margin-top:10px;font-size:14px;font-weight:600}.nova-box{display:flex;align-items:center;gap:12px;padding:14px;border-radius:10px;margin-bottom:20px}.nova-badge{width:40px;height:40px;border-radius:10px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0}.nova-name{font-weight:600;font-size:14px;color:#1a1a1a}.nova-verdict{color:#57534e;font-size:12px}.whole-food-note{text-align:center;padding:16px;background:#f0fdf4;border-radius:10px;color:#15803d;margin-bottom:20px;font-weight:500}.ingredients-box{margin-bottom:20px}.section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#a8a29e;margin-bottom:8px}.ingredients-text{font-size:13px;color:#57534e;line-height:1.5;padding:12px;background:#fafaf9;border-radius:8px}.markers-section{margin-bottom:20px}.markers-list{margin:-3px}.marker-pill{display:inline-block;padding:8px 12px;border-radius:8px;font-size:13px;margin:3px;font-weight:500;cursor:pointer;transition:.15s}.marker-pill:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.1)}.marker-pill.high{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}.marker-pill.medium{background:#fffbeb;color:#b45309;border:1px solid #fde68a}.marker-pill.low{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}.marker-pill.selected{box-shadow:0 0 0 2px #1a1a1a}.detail-card{background:#fafaf9;border-radius:12px;padding:20px;margin-top:16px;border:1px solid #e7e5e4}.detail-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}.detail-title{margin:0;font-size:16px;font-weight:600;text-transform:capitalize}.detail-close{background:none;border:none;cursor:pointer;padding:4px;color:#78716c;font-size:18px}.detail-text{font-size:14px;color:#44403c;line-height:1.6;margin:0 0 12px}.detail-section{margin-bottom:12px}.detail-section-label{font-size:12px;color:#78716c;font-weight:600}.detail-section-text{font-size:13px;margin:4px 0 0;color:#57534e}.detail-section-text.green{color:#15803d}.ask-section{border-top:1px solid #e7e5e4;padding-top:20px}.quick-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.ask-row{display:flex;gap:8px}.ask-row input{flex:1}.ai-response{margin-top:16px;padding:16px;background:#f5f5f4;border-radius:10px;white-space:pre-wrap;line-height:1.6;font-size:14px;color:#44403c}.guide-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:#fafaf9;margin-bottom:6px}.guide-range{width:36px;font-weight:700;font-size:12px}.guide-label{font-weight:600;color:#1a1a1a;font-size:13px}.guide-desc{color:#78716c;font-size:12px}.footer{text-align:center;color:#a8a29e;font-size:11px}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeIn .25s ease}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>UPF Analyzer</h1>
+    <p class="subtitle">Analyze ingredients, scan labels, or photograph any food</p>
+    <div class="card">
+      <div class="mode-tabs"><button class="mode-tab active" data-mode="text">Type</button><button class="mode-tab" data-mode="label">Label</button><button class="mode-tab" data-mode="food">Food Photo</button></div>
+      <div id="text-input"><textarea id="ingredients-input" placeholder="Paste ingredients list here..."></textarea></div>
+      <div id="image-input" class="hidden"><input type="file" id="file-input" accept="image/*" style="display:none"><div class="upload-zone" id="upload-zone"><div style="width:44px;height:44px;margin:0 auto 10px;background:#e7e5e4;border-radius:10px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" fill="none" stroke="#78716c" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><p style="color:#57534e;font-weight:500;font-size:14px" id="upload-title">Upload ingredients label</p><p style="color:#a8a29e;font-size:13px;margin-top:4px" id="upload-subtitle">Photo of the ingredients list</p></div></div>
+      <div id="error-box" class="error-box hidden"></div>
+      <div class="btn-row"><button class="btn btn-primary" id="analyze-btn" disabled>Analyze</button><button class="btn btn-secondary hidden" id="clear-btn">Clear</button></div>
+    </div>
+    <div class="card hidden fade-in" id="result-card"><div id="result-content"></div></div>
+    <div class="card">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:14px;color:#1a1a1a">Avoid Score Guide</h3>
+      <div class="guide-item"><div class="guide-range" style="color:#16a34a">1-2</div><span class="guide-label">Excellent</span><span class="guide-desc">— Whole, unprocessed</span></div>
+      <div class="guide-item"><div class="guide-range" style="color:#65a30d">3-4</div><span class="guide-label">Good</span><span class="guide-desc">— Minimally processed</span></div>
+      <div class="guide-item"><div class="guide-range" style="color:#d97706">5-6</div><span class="guide-label">Moderate</span><span class="guide-desc">— Some processing</span></div>
+      <div class="guide-item"><div class="guide-range" style="color:#ea580c">7-8</div><span class="guide-label">Poor</span><span class="guide-desc">— Limit intake</span></div>
+      <div class="guide-item" style="margin-bottom:0"><div class="guide-range" style="color:#dc2626">9-10</div><span class="guide-label">Avoid</span><span class="guide-desc">— Heavily processed</span></div>
+    </div>
+    <p class="footer">Based on NOVA classification • Inspired by "Ultra-Processed People"</p>
+  </div>
+<script>
+var D={
+'high fructose corn syrup':{d:'Industrial sweetener linked to obesity, diabetes, and fatty liver disease. Made by converting corn starch to fructose.',a:['Honey','Maple syrup','Fresh fruit'],c:['Soft drinks','Candy','Bread','Cereals']},
+'maltodextrin':{d:'Highly processed starch with glycemic index higher than sugar (85-105). Spikes blood sugar rapidly and may alter gut bacteria.',a:['Tapioca starch','Arrowroot'],c:['Protein powders','Chips','Salad dressings']},
+'sodium nitrite':{d:'Preservative in processed meats. Forms carcinogenic nitrosamines when heated. WHO classifies nitrite-containing processed meats as Group 1 carcinogens.',a:['Fresh unprocessed meats'],c:['Bacon','Hot dogs','Deli meats','Ham']},
+'aspartame':{d:'Artificial sweetener classified as "possibly carcinogenic" by WHO in 2023. People with PKU must avoid entirely.',a:['Stevia','Monk fruit','Small amounts of real sugar'],c:['Diet sodas','Sugar-free gum','Protein bars']},
+'red 40':{d:'Petroleum-derived synthetic dye linked to hyperactivity in children. Banned or requires warnings in several EU countries.',a:['Beet juice','Paprika'],c:['Candy','Cereals','Beverages']},
+'partially hydrogenated':{d:'Primary source of artificial trans fats. Raises LDL, lowers HDL cholesterol. Significantly increases heart disease risk.',a:['Olive oil','Avocado oil','Coconut oil'],c:['Some margarines','Fried foods','Baked goods']},
+'monosodium glutamate':{d:'Flavor enhancer that makes processed foods hyper-palatable, encouraging overconsumption. Naturally occurs in tomatoes and parmesan.',a:['Mushrooms','Aged cheeses','Tomato paste'],c:['Chips','Instant noodles','Soups']},
+'carrageenan':{d:'Seaweed-derived thickener linked to gut inflammation. May exacerbate inflammatory bowel conditions.',a:['Guar gum','Gelatin','Agar'],c:['Non-dairy milks','Ice cream','Deli meats']},
+'palm oil':{d:'Highly refined at high temperatures. 50% saturated fat. Production linked to deforestation.',a:['Olive oil','Avocado oil'],c:['Cookies','Crackers','Chocolate','Margarine']},
+'natural flavor':{d:'Catch-all term for hundreds of industrially-extracted chemicals. Designed to make foods more addictive.',a:['Whole herbs/spices','Fresh citrus zest','Real vanilla'],c:['Almost all processed foods']},
+'titanium dioxide':{d:'Industrial whitener banned in EU (2022) due to DNA damage concerns. Nanoparticles accumulate in organs.',a:['Calcium carbonate','Rice starch'],c:['Candy','Frosting','Chewing gum']},
+'polysorbate':{d:'Synthetic emulsifier that damages gut lining and promotes inflammation linked to metabolic syndrome.',a:['Sunflower lecithin','Egg yolk'],c:['Ice cream','Salad dressings','Sauces']},
+'tbhq':{d:'Synthetic antioxidant derived from butane. Caused stomach tumors in lab animals. May weaken immune response.',a:['Vitamin E','Rosemary extract'],c:['Fast food','Crackers','Microwave popcorn']},
+'sucralose':{d:'Chlorinated artificial sweetener. Recent research shows DNA damage and gut bacteria disruption. Releases toxins when heated.',a:['Stevia','Monk fruit'],c:['Diet drinks','Sugar-free products']},
+'caramel color':{d:'Most common food coloring. May contain 4-MEI, a possible carcinogen. California requires warning labels.',a:['Molasses','Cocoa'],c:['Cola','Beer','Soy sauce']}
+};
+var M=[
+{i:'high fructose corn syrup',s:'high'},{i:'hfcs',s:'high'},{i:'maltodextrin',s:'high'},{i:'dextrose',s:'medium'},
+{i:'modified starch',s:'high'},{i:'modified food starch',s:'high'},{i:'hydrolyzed',s:'high'},{i:'protein isolate',s:'high'},
+{i:'soy protein isolate',s:'high'},{i:'whey protein isolate',s:'medium'},{i:'invert sugar',s:'medium'},{i:'glucose syrup',s:'high'},
+{i:'corn syrup',s:'high'},{i:'aspartame',s:'high'},{i:'sucralose',s:'high'},{i:'acesulfame',s:'high'},{i:'saccharin',s:'high'},
+{i:'sodium nitrite',s:'high'},{i:'sodium nitrate',s:'high'},{i:'bha',s:'high'},{i:'bht',s:'high'},{i:'tbhq',s:'high'},
+{i:'monosodium glutamate',s:'medium'},{i:'msg',s:'medium'},{i:'disodium inosinate',s:'medium'},{i:'disodium guanylate',s:'medium'},
+{i:'autolyzed yeast',s:'medium'},{i:'yeast extract',s:'medium'},{i:'carrageenan',s:'medium'},{i:'xanthan gum',s:'low'},
+{i:'guar gum',s:'low'},{i:'cellulose',s:'medium'},{i:'methylcellulose',s:'medium'},{i:'polysorbate',s:'high'},
+{i:'mono and diglycerides',s:'medium'},{i:'sodium stearoyl lactylate',s:'medium'},{i:'datem',s:'medium'},
+{i:'artificial flavor',s:'high'},{i:'natural flavor',s:'low'},{i:'natural flavors',s:'low'},{i:'caramel color',s:'medium'},
+{i:'red 40',s:'high'},{i:'red 3',s:'high'},{i:'yellow 5',s:'high'},{i:'yellow 6',s:'high'},{i:'blue 1',s:'high'},
+{i:'titanium dioxide',s:'high'},{i:'partially hydrogenated',s:'high'},{i:'hydrogenated oil',s:'high'},{i:'interesterified',s:'high'},
+{i:'palm oil',s:'medium'},{i:'vegetable oil',s:'low'},{i:'soybean oil',s:'low'},{i:'sodium benzoate',s:'medium'},
+{i:'potassium sorbate',s:'low'},{i:'phosphate',s:'medium'},{i:'soy lecithin',s:'low'},{i:'lecithin',s:'low'},
+{i:'citric acid',s:'low'},{i:'dimethylpolysiloxane',s:'high'},{i:'enriched flour',s:'low'},{i:'bleached flour',s:'medium'},
+{i:'azodicarbonamide',s:'high'}
+];
+var N={1:{n:'Unprocessed or Minimally Processed',c:'#22c55e',b:'#dcfce7',v:'Excellent — eat freely'},2:{n:'Processed Culinary Ingredients',c:'#84cc16',b:'#ecfccb',v:'Fine in moderation'},3:{n:'Processed Foods',c:'#f59e0b',b:'#fef3c7',v:'Acceptable — limit consumption'},4:{n:'Ultra-Processed Foods (UPF)',c:'#ef4444',b:'#fee2e2',v:'Minimize or avoid'}};
+var mode='text',imgFile=null,imgPrev=null,result=null,selIng=null,extracted='';
+var $=function(id){return document.getElementById(id)};
+var tabs=document.querySelectorAll('.mode-tab'),txtIn=$('text-input'),imgIn=$('image-input'),inp=$('ingredients-input'),fileIn=$('file-input'),upZone=$('upload-zone'),anaBtn=$('analyze-btn'),clrBtn=$('clear-btn'),errBox=$('error-box'),resCard=$('result-card'),resCont=$('result-content');
+
+function col(s){return s<=2?'#16a34a':s<=4?'#65a30d':s<=6?'#d97706':s<=8?'#ea580c':'#dc2626'}
+function info(s){return s<=2?{l:'Excellent',e:'✓'}:s<=4?{l:'Good',e:'○'}:s<=6?{l:'Moderate',e:'△'}:s<=8?{l:'Poor',e:'⚠'}:{l:'Avoid',e:'✕'}}
+
+function analyze(list){
+  var norm=list.toLowerCase(),found=[],ord={none:0,low:1,medium:2,high:3},seen={},high='none';
+  M.forEach(function(m){if(norm.indexOf(m.i)!==-1&&!seen[m.i]){found.push(m);seen[m.i]=true;if(ord[m.s]>ord[high])high=m.s}});
+  var cnt=(norm.match(/,/g)||[]).length+1,nova=1;
+  if(!found.length){nova=cnt<=3?(norm.indexOf('salt')!==-1||norm.indexOf('sugar')!==-1||norm.indexOf('oil')!==-1?2:1):3}
+  else if(found.some(function(m){return m.s==='high'})||found.some(function(m){return m.s==='medium'})||found.length>3)nova=4;
+  else if(found.length>0)nova=cnt>5?4:3;
+  found.sort(function(a,b){return ord[b.s]-ord[a.s]});
+  var sc=1;if(nova===1)sc=1;else if(nova===2)sc=2;else if(nova===3)sc=3+Math.min(found.length,2);
+  else{var h=found.filter(function(m){return m.s==='high'}).length,med=found.filter(function(m){return m.s==='medium'}).length;sc=Math.min(10,Math.max(5,Math.round(5+h*1.5+med*.5)));if(h>=5)sc=Math.max(sc,9);if(h>=8)sc=10}
+  return{nova:nova,markers:found,cnt:cnt,raw:list,score:sc}
+}
+
+function err(m){errBox.textContent=m;errBox.classList.remove('hidden')}
+function noErr(){errBox.classList.add('hidden')}
+function updBtn(){anaBtn.disabled=mode==='text'?!inp.value.trim():!imgFile;clrBtn.classList.toggle('hidden',mode==='text'?!inp.value.trim():!imgFile)}
+
+function clear(){
+  inp.value='';imgFile=null;imgPrev=null;result=null;selIng=null;extracted='';fileIn.value='';
+  upZone.classList.remove('has-image');
+  upZone.innerHTML='<div style="width:44px;height:44px;margin:0 auto 10px;background:#e7e5e4;border-radius:10px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" fill="none" stroke="#78716c" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><p style="color:#57534e;font-weight:500;font-size:14px" id="upload-title">'+(mode==='label'?'Upload ingredients label':'Upload food photo')+'</p><p style="color:#a8a29e;font-size:13px;margin-top:4px" id="upload-subtitle">'+(mode==='label'?'Photo of the ingredients list':'Any food — whole foods, packaged products')+'</p>';
+  resCard.classList.add('hidden');noErr();updBtn()
+}
+
+function render(r){
+  result=r;var sc=col(r.score),si=info(r.score),nv=N[r.nova],h='';
+  if(r.type==='wholeFood'||r.type==='identifiedFood')h+='<div class="result-header"><div class="result-brand">'+(r.brand||r.category||'Identified Food')+'</div><div class="result-name">'+r.name+'</div>'+(r.confidence?'<span class="confidence-badge confidence-'+r.confidence+'">'+r.confidence+' confidence</span>':'')+(r.notes?'<div class="result-notes">'+r.notes+'</div>':'')+'</div>';
+  h+='<div class="score-section"><div class="score-label">Avoid Score</div><div class="score-ring" style="background:conic-gradient('+sc+' '+(r.score*10)+'%,#e7e5e4 0%)"><div class="score-inner"><div class="score-number" style="color:'+sc+'">'+r.score+'</div><div class="score-max">/10</div></div></div><div class="score-verdict" style="color:'+sc+'">'+si.e+' '+si.l+'</div></div>';
+  h+='<div class="nova-box" style="background:'+nv.b+'"><div class="nova-badge" style="background:'+nv.c+'">'+r.nova+'</div><div><div class="nova-name">'+nv.n+'</div><div class="nova-verdict">'+nv.v+'</div></div></div>';
+  if(r.type==='wholeFood'&&r.note)h+='<div class="whole-food-note">'+r.note+'</div>';
+  if(extracted)h+='<div class="ingredients-box"><div class="section-label">'+(r.type==='identifiedFood'?'Known/Typical Ingredients':'Extracted Ingredients')+'</div><div class="ingredients-text">'+extracted+'</div></div>';
+  if(r.markers&&r.markers.length)h+='<div class="markers-section"><div class="section-label">UPF Markers — click for details</div><div class="markers-list">'+r.markers.map(function(m){return'<span class="marker-pill '+m.s+'" data-i="'+m.i+'">'+m.i+'</span>'}).join('')+'</div><div id="det"></div></div>';
+  h+='<div class="ask-section"><div class="section-label">Ask about this food</div><div class="quick-btns"><button class="btn btn-secondary btn-sm" onclick="ask(\'Why is this processed?\')">Why this score?</button><button class="btn btn-secondary btn-sm" onclick="ask(\'What are healthier alternatives?\')">Alternatives?</button><button class="btn btn-secondary btn-sm" onclick="ask(\'What are health concerns?\')">Health concerns?</button></div><div class="ask-row"><input type="text" id="q" placeholder="Ask a custom question..." onkeydown="if(event.key===\'Enter\')ask(this.value)"><button class="btn btn-primary btn-sm" onclick="ask($(\'q\').value)">Ask</button></div><div id="ai"></div></div>';
+  resCont.innerHTML=h;resCard.classList.remove('hidden');
+  document.querySelectorAll('.marker-pill').forEach(function(p){p.onclick=function(){var i=p.dataset.i;if(selIng===i){selIng=null;$('det').innerHTML='';document.querySelectorAll('.marker-pill').forEach(function(x){x.classList.remove('selected')})}else{selIng=i;document.querySelectorAll('.marker-pill').forEach(function(x){x.classList.remove('selected')});p.classList.add('selected');showDet(i)}}})
+}
+
+function showDet(i){
+  var d=D[i],el=$('det');
+  if(d)el.innerHTML='<div class="detail-card"><div class="detail-header"><h4 class="detail-title">'+i+'</h4><button class="detail-close" onclick="closeDet()">✕</button></div><p class="detail-text">'+d.d+'</p><div class="detail-section"><div class="detail-section-label">COMMON IN:</div><p class="detail-section-text">'+d.c.join(', ')+'</p></div><div class="detail-section"><div class="detail-section-label">ALTERNATIVES:</div><p class="detail-section-text green">'+d.a.join(', ')+'</p></div></div>';
+  else el.innerHTML='<div class="detail-card"><div class="detail-header"><h4 class="detail-title">'+i+'</h4><button class="detail-close" onclick="closeDet()">✕</button></div><p class="detail-text" style="color:#78716c">No detailed info available.</p><button class="btn btn-secondary btn-sm" onclick="askIng(\''+i+'\')">Ask AI about this</button></div>'
+}
+window.closeDet=function(){selIng=null;$('det').innerHTML='';document.querySelectorAll('.marker-pill').forEach(function(x){x.classList.remove('selected')})};
+
+window.askIng=function(i){var el=$('ai');el.innerHTML='<div class="ai-response">Loading...</div>';fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,messages:[{role:'user',content:'Tell me about "'+i+'" as a food additive: what it is, health concerns, alternatives. Be concise.'}]})}).then(function(r){return r.json()}).then(function(d){el.innerHTML='<div class="ai-response">'+d.content[0].text+'</div>'}).catch(function(){el.innerHTML='<div class="ai-response">Failed to load.</div>'})};
+
+window.ask=function(q){if(!q||!q.trim())return;var el=$('ai');el.innerHTML='<div class="ai-response">Loading...</div>';var ctx=result?'Food: '+(result.name||'Unknown')+'. Ingredients: '+(extracted||result.raw||'N/A')+'. NOVA: '+result.nova+', Score: '+result.score+'/10.':'';fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:ctx+'\n\nQuestion: '+q+'\n\nProvide a helpful, concise answer about health/processing.'}]})}).then(function(r){return r.json()}).then(function(d){el.innerHTML='<div class="ai-response">'+d.content[0].text+'</div>'}).catch(function(){el.innerHTML='<div class="ai-response">Failed to load.</div>'})};
+
+async function doAnalyze(){
+  noErr();anaBtn.textContent='Analyzing...';anaBtn.disabled=true;
+  try{
+    if(mode==='text'){render(analyze(inp.value))}
+    else if(mode==='label'){
+      var b=imgPrev.split(',')[1];
+      var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:imgFile.type,data:b}},{type:'text',text:'Extract ingredients from this label as comma-separated list. If unreadable: ERROR'}]}]})});
+      var d=await r.json(),t=d.content[0].text;
+      if(t.indexOf('ERROR')===0)err('Could not read. Try clearer photo.');else{extracted=t;render(analyze(t))}
+    }else if(mode==='food'){
+      var b=imgPrev.split(',')[1];
+      var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:imgFile.type,data:b}},{type:'text',text:'Identify this food. If branded product, provide typical ingredients. JSON only: {"food":"name","brand":"brand or null","isWholeFood":true/false,"category":"cat","ingredients":"comma list","confidence":"high/medium/low","notes":"processing notes"} If cannot identify: {"error":"x"}'}]}]})});
+      var d=await r.json(),t=d.content[0].text;
+      try{var p=JSON.parse(t);if(p.error)err('Could not identify.');else if(p.isWholeFood)render({type:'wholeFood',name:p.food,brand:p.brand,score:1,nova:1,category:p.category,note:'Whole, unprocessed food',markers:[],confidence:p.confidence,notes:p.notes});else{extracted=p.ingredients;var a=analyze(p.ingredients);render(Object.assign({},a,{type:'identifiedFood',name:p.food,brand:p.brand,confidence:p.confidence,notes:p.notes}))}}catch(e){err('Parse error.')}
+    }
+  }catch(e){err('Analysis failed.')}
+  anaBtn.textContent='Analyze';updBtn()
+}
+
+tabs.forEach(function(t){t.onclick=function(){tabs.forEach(function(x){x.classList.remove('active')});t.classList.add('active');mode=t.dataset.mode;if(mode==='text'){txtIn.classList.remove('hidden');imgIn.classList.add('hidden')}else{txtIn.classList.add('hidden');imgIn.classList.remove('hidden')}clear()}});
+inp.oninput=updBtn;
+upZone.onclick=function(){fileIn.click()};
+fileIn.onchange=function(e){var f=e.target.files[0];if(f){imgFile=f;var r=new FileReader();r.onload=function(e){imgPrev=e.target.result;upZone.classList.add('has-image');upZone.innerHTML='<img src="'+imgPrev+'"><p style="color:#78716c;font-size:12px;margin-top:10px">Click to change</p>';updBtn()};r.readAsDataURL(f)}};
+anaBtn.onclick=doAnalyze;
+clrBtn.onclick=clear;
+</script>
+</body>
+</html>
